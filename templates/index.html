@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Oracle Bot</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/shared.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+<body>
+    <header class="header">
+        <a href="/" class="logo">
+            <span class="bracket">&lt;</span>
+            <span class="oracle-text"> Oracle </span>
+            <span class="slash">/</span>
+            <span class="bracket">&gt;</span>
+        </a>
+        <div class="header-right">
+            {% if current_user.is_authenticated %}
+                <div class="user-profile">
+                    <span>{{ current_user.username }}</span>
+                    <img src="{{ current_user.avatar_url }}" alt="{{ current_user.username }}" class="user-avatar">
+                </div>
+                <a href="{{ url_for('logout') }}" class="material-button">Logout</a>
+                <a href="{{ url_for('bot_settings') }}" class="material-button">Dashboard</a>
+            {% else %}
+                <a href="{{ url_for('login') }}" class="material-button">Login with Discord</a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="content-wrapper">
+        <nav class="sidebar">
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-item active">
+                    <i class="material-icons">home</i>
+                    Home
+                </a>
+                <a href="#features" class="nav-item">
+                    <i class="material-icons">star</i>
+                    Features
+                </a>
+                <a href="#about" class="nav-item">
+                    <i class="material-icons">info</i>
+                    About
+                </a>
+                {% if current_user.is_authenticated %}
+                    <a href="{{ url_for('knowledgebase') }}" class="nav-item">
+                        <i class="material-icons">book</i>
+                        Knowledgebase
+                    </a>
+                {% endif %}
+            </nav>
+        </nav>
+        <main class="content">
+            <section id="features" class="features-section">
+                <h2>Features</h2>
+                <div class="feature-grid">
+                    <div class="feature-card">
+                        <i class="material-icons">chat</i>
+                        <h3>Natural Conversations</h3>
+                        <p>Engage in human-like dialogues with advanced language understanding.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="material-icons">psychology</i>
+                        <h3>AI-Powered Insights</h3>
+                        <p>Get intelligent answers and analysis on various topics.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="material-icons">extension</i>
+                        <h3>Custom Commands</h3>
+                        <p>Create and use personalized commands for your server.</p>
+                    </div>
+                    <div class="feature-card">
+                        <i class="material-icons">security</i>
+                        <h3>Moderation Tools</h3>
+                        <p>Keep your server safe with AI-assisted moderation features.</p>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="about" class="about-section">
+                <h2>About Oracle</h2>
+                <div class="about-content">
+                    <p>Oracle is not just another Discord bot – it's your server's AI-powered companion. With advanced natural language processing and machine learning capabilities, Oracle can engage in meaningful conversations, provide insightful answers, and assist with various tasks. From moderating your server to providing entertainment, Oracle is here to elevate your Discord experience.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>

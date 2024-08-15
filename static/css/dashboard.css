@@ -1,0 +1,285 @@
+@import 'base.css';
+@import 'shared.css';
+
+:root {
+  --primary-color: #8A2BE2; /* Vibrant purple for Oracle text */
+  --bracket-color: #FFFFFF; /* White for the brackets and slash */
+  --header-color: #1A1A1A; /* Dark for header */
+  --text-color: #FFFFFF; /* White text for contrast */
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: var(--background-color);
+    color: var(--on-background);
+}
+
+.content {
+    flex-grow: 1;
+    padding: 2rem;
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: var(--on-background);
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 100%;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group.large {
+    width: 70%; /* Match the previous width of medium and small */
+}
+
+.form-group.medium,
+.form-group.small {
+    width: 40%; /* Shorten these even further */
+}
+
+.form-control {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--outline);
+    border-radius: 4px;
+    background-color: var(--surface-color);
+    color: var(--on-surface);
+    font-size: 1rem;
+}
+
+textarea.form-control {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--on-primary);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    font-size: 1rem;
+    align-self: flex-start;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-variant);
+}
+
+@media (max-width: 768px) {
+    .content {
+        padding: 1rem;
+    }
+
+    .form-group.large,
+    .form-group.medium,
+    .form-group.small {
+        width: 100%;
+    }
+}
+
+/* Header styles */
+.header {
+  background-color: var(--header-color);
+  padding: 1rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 2px solid var(--primary-color);
+}
+
+/* Logo styles */
+.logo {
+  font-family: 'Courier New', monospace;
+  font-size: 1.8rem;
+  font-weight: bold;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+}
+
+.logo .bracket,
+.logo .slash {
+  color: var(--bracket-color);
+}
+
+.logo .oracle-text {
+  color: var(--primary-color);
+}
+
+/* Sidebar styles */
+.sidebar {
+  background-color: var(--sidebar-color);
+  width: 250px;
+  padding: 1rem;
+  color: var(--text-color);
+  position: relative;
+}
+
+/* Vertical purple line next to sidebar */
+.sidebar::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: var(--primary-color);
+}
+
+/* Content wrapper */
+.content-wrapper {
+  display: flex;
+  flex-grow: 1;
+}
+
+/* Main content area */
+.content {
+  flex-grow: 1;
+  padding: 2rem;
+  margin-left: 1rem;
+  background-color: var(--header-color);
+  color: var(--text-color);
+}
+
+.server-selector {
+    width: 332px;
+    padding: 16px;
+    background: #202225;
+    border-radius: 5px;
+}
+
+.discord-dropdown {
+    position: relative;
+    width: 100%;
+}
+
+.dropdown-toggle {
+    display: none;
+}
+
+.selected-server {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: #2F3136;
+    border-radius: 4px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.server-icon {
+    width: 20px;
+    height: 20px;
+    background-color: #36393F;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.server-name {
+    flex-grow: 1;
+    color: #DCDDDE;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.dropdown-icon {
+    width: 18px;
+    height: 18px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23DCDDDE'%3E%3Cpath d='M7 10l5 5 5-5z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    transition: transform 0.2s;
+}
+
+.server-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 8px;
+    background: #2F3136;
+    border-radius: 4px;
+    overflow: hidden;
+    z-index: 1000;
+    max-height: 300px;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.24);
+}
+
+.dropdown-toggle:checked ~ .server-list {
+    display: block;
+}
+
+.dropdown-toggle:checked + .selected-server .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.server-item {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.server-item:hover {
+    background-color: #36393F;
+}
+
+.server-item .server-icon {
+    width: 24px;
+    height: 24px;
+    background-color: #36393F;
+    border-radius: 4px;
+    margin-right: 10px;
+}
+
+.server-item .server-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.server-item .server-name {
+    color: #DCDDDE;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.server-item .server-description {
+    font-size: 12px;
+    color: #8E9297;
+    margin-top: 2px;
+}
+
+/* Scrollbar styling */
+.server-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.server-list::-webkit-scrollbar-track {
+    background: #2f3136;
+}
+
+.server-list::-webkit-scrollbar-thumb {
+    background-color: #202225;
+    border-radius: 4px;
+}
+
+.server-list::-webkit-scrollbar-thumb:hover {
+    background-color: #2e3338;
+}

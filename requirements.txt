@@ -1,0 +1,8 @@
+Flask
+Flask-Discord
+Flask-Login
+Flask-WTF
+SQLAlchemy
+Flask-Migrate
+python-dotenv
+Flask-CORS

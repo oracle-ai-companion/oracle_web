@@ -1,0 +1,26 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Oracle Dashboard - Oracle Bot{% endblock %}
+
+{% block content %}
+<h2>Oracle Dashboard</h2>
+<div id="server-dropdown" data-access-token="{{ access_token }}"></div>
+<form method="POST" class="settings-form" id="settings-form" style="display: none">
+  {{ form.hidden_tag() }}
+  <!-- ... rest of the form ... -->
+</form>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', filename='js/bundle.js') }}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const serverDropdownContainer = document.getElementById('server-dropdown');
+    const accessToken = serverDropdownContainer.getAttribute('data-access-token');
+    ReactDOM.render(
+      React.createElement(ServerDropdown, { accessToken: accessToken }),
+      serverDropdownContainer
+    );
+  });
+</script>
+{% endblock %}
